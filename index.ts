@@ -1,15 +1,14 @@
 import express from "express";
 import cors from "cors";
-import { crnView } from "./controllers/view";
 import env from "dotenv";
+import { crnView } from "./controllers/view";
 import appStartFunction from "./controllers/appStartFunction";
 import viewRoutes from "./routes/view.json";
 import versionRoute from "./routes/version";
 import iconRoute from "./routes/icon";
 
-const multipart = require("connect-multiparty");
-const multipartMiddleware = multipart();
 const app = express();
+const multipartMiddleware = require("connect-multiparty")();
 
 // Setting
 env.config();

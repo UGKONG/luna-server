@@ -2,8 +2,22 @@ import type { Request, Response } from "express";
 import { fail, success } from "../hooks/useApiResponse";
 import useDatabase from "../hooks/useDatabase";
 import fs from "fs";
-import { UploadFile } from "../types";
 
+interface UploadFileHeaders {
+  "content-disposition": string;
+  "content-type": string;
+}
+interface UploadFile {
+  fieldName: string;
+  headers: UploadFileHeaders;
+  name: string;
+  originalFilename: string;
+  path: string;
+  size: number;
+  type: string;
+}
+
+// 아이콘 리스트 조회
 export const getIcon = async (req: Request, res: Response) => {
   const id = req?.query?.id;
   const parentId = req?.query?.parentId;
@@ -29,11 +43,13 @@ export const getIcon = async (req: Request, res: Response) => {
   res.send(success(id ? result[0] : result));
 };
 
+// 아이콘 추가
 export const postIcon = async (req: Request, res: Response) => {
   const parentId = req?.query?.parentId ?? req?.body?.parentId;
-  const files = req?.files as any;
-  const file: UploadFile | undefined = files?.file;
-  if (!parentId || !file) return res.send(fail());
+  const iconType = req?.query?.iconType ?? req?.body?.iconType;
+  const file = (req?.files as any)?.file as UploadFile;
+
+  if (!parentId || (Number(iconType) === 2 && !file)) return res.send(fail());
 
   const { error, result } = await useDatabase(
     `
@@ -43,7 +59,7 @@ export const postIcon = async (req: Request, res: Response) => {
       ?, ?, ?
     );
     `,
-    [parentId, 2, file?.name]
+    [parentId, iconType, file?.name]
   );
 
   if (error) return res.send(fail());

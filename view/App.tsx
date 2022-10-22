@@ -1,24 +1,13 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import { Provider } from "react-redux";
+import useStore from "../hooks/useStore";
+import MainComponent from "./Main";
 
 export default function App() {
-  const [list, setList] = useState([]);
-
   return (
-    <main>
-      Hello React
-      <button
-        onClick={() => {
-          axios
-            .get("http://sanguk.kr/api/weather?start=20221001&end=20221011")
-            .then(({ data }) => setList(data?.data));
-        }}
-      >
-        GET
-      </button>
-      <br />
-      <br />
-      {JSON.stringify(list)}
-    </main>
+    <Provider store={useStore}>
+      <title>jCloud</title>
+      <MainComponent />
+    </Provider>
   );
 }
