@@ -5,7 +5,6 @@ import { crnView } from "./controllers/view";
 import appStartFunction from "./controllers/appStartFunction";
 import viewRoutes from "./routes/view.json";
 import versionRoute from "./routes/version";
-import iconRoute from "./routes/icon";
 
 const app = express();
 const multipartMiddleware = require("connect-multiparty")();
@@ -21,8 +20,7 @@ app.use(express.static(absolutePath));
 viewRoutes.forEach((path: string) => app.get(path, crnView));
 
 // Api
-app.use("/api/version", versionRoute);
-app.use("/api/icon", multipartMiddleware, iconRoute);
+app.use("/api/version", multipartMiddleware, versionRoute);
 
 // Start
 app.listen(process.env.SERVER_PORT, appStartFunction);

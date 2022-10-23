@@ -1,19 +1,18 @@
 import { createStore } from "redux";
-import { Path } from "../types";
 
 export interface StoreDispatch {
-  type: string;
-  payload: any;
+  type: s;
+  payload: a;
 }
 
 export interface StoreState {
-  path: Path[];
-  clickIconList: number[];
+  number: n;
+  name: s;
 }
 
 const currentState: StoreState = {
-  path: [{ id: 0, name: "홈" }],
-  clickIconList: [],
+  number: 1,
+  name: "전상욱",
 };
 
 const reducer = (
