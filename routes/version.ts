@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { getVersion } from "../controllers/version";
 
-const versionRoute = Router();
+const versionRouter = Router();
 
-versionRoute.get("/", getVersion);
+versionRouter.get("/", getVersion);
 
-export default versionRoute;
+export default versionRouter;

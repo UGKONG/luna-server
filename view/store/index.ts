@@ -1,15 +1,5 @@
 import { createStore } from "redux";
 
-export interface StoreDispatch {
-  type: s;
-  payload: a;
-}
-
-export interface StoreState {
-  number: n;
-  name: s;
-}
-
 const currentState: StoreState = {
   number: 1,
   name: "전상욱",
@@ -25,5 +15,5 @@ const reducer = (
   };
 };
 
-const useStore = createStore(reducer);
-export default useStore;
+const store = createStore(reducer);
+export default store;

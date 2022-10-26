@@ -4,7 +4,10 @@ import env from "dotenv";
 import { crnView } from "./controllers/view";
 import appStartFunction from "./controllers/appStartFunction";
 import viewRoutes from "./routes/view.json";
-import versionRoute from "./routes/version";
+import userRouter from "./routes/user";
+import versionRouter from "./routes/version";
+import deviceRouter from "./routes/device";
+import daysRouter from "./routes/days";
 
 const app = express();
 const multipartMiddleware = require("connect-multiparty")();
@@ -20,7 +23,10 @@ app.use(express.static(absolutePath));
 viewRoutes.forEach((path: string) => app.get(path, crnView));
 
 // Api
-app.use("/api/version", multipartMiddleware, versionRoute);
+app.use("/api/user", multipartMiddleware, userRouter);
+app.use("/api/version", multipartMiddleware, versionRouter);
+app.use("/api/device", multipartMiddleware, deviceRouter);
+app.use("/api/days", multipartMiddleware, daysRouter);
 
 // Start
-app.listen(process.env.SERVER_PORT, appStartFunction);
+app.listen(process.env.SERVER_PORT ?? 8080, appStartFunction);

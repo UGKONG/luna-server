@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
-import { success } from "../hooks/useApiResponse";
-import useDate from "../hooks/useDate";
 import { Version } from "../types";
+import { success, useDate } from "../utils";
 
 export const getVersion = (req: Request, res: Response) => {
   const result: Version = {
