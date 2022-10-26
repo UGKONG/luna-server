@@ -102,7 +102,7 @@ export const fail = (message: string = "Error"): FailResponseData => {
  * message: "success"
  * current: "성공입니다."
  */
-export const success = (data: any = {}): SuccessResponseData => {
+export const success = (data: any = null): SuccessResponseData => {
   return {
     result: true,
     message: "success",

@@ -7,6 +7,13 @@ export const userLogin = async (req: Request, res: Response) => {
   const SNS_PLATFORM: string = req?.body?.SNS_PLATFORM;
   const APP_PLATFORM: string = req?.body?.APP_PLATFORM;
 
+  console.log("로그인 시도", {
+    AUTH_ID,
+    USER_NAME,
+    SNS_PLATFORM,
+    APP_PLATFORM,
+  });
+
   if (!AUTH_ID || !USER_NAME || !SNS_PLATFORM || !APP_PLATFORM) {
     return res.send(fail());
   }
