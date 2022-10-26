@@ -20,8 +20,9 @@ export const getDays = async (req: Request, res: Response) => {
     WHERE USER_ID = ?
     AND APP_PLATFORM = ?
     AND (
-      DATE_FORMAT(START_DATE, '%Y%m') = ? OR
-      DATE_FORMAT(END_DATE, '%Y%m') = ?
+      DATE_FORMAT(START_DATE, '%Y%m') = ? OR 
+      DATE_FORMAT(END_DATE, '%Y%m') = ? OR 
+      END_DATE IS NULL
     )
     ORDER BY START_DATE, DAYS_ID;
   `,
