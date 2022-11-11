@@ -10,7 +10,7 @@ import deviceRouter from "./routes/device";
 import daysRouter from "./routes/days";
 
 const app = express();
-const multipartMiddleware = require("connect-multiparty")();
+const multiparty = require("connect-multiparty")();
 
 // Setting
 env.config();
@@ -20,13 +20,14 @@ app.use(express.json());
 // Router
 const absolutePath: string = __dirname + "/build";
 app.use(express.static(absolutePath));
+app.use("/application", express.static(__dirname + "/application"));
 viewRoutes.forEach((path: string) => app.get(path, crnView));
 
 // Api
-app.use("/api/user", multipartMiddleware, userRouter);
-app.use("/api/version", multipartMiddleware, versionRouter);
-app.use("/api/device", multipartMiddleware, deviceRouter);
-app.use("/api/days", multipartMiddleware, daysRouter);
+app.use("/api/user", multiparty, userRouter);
+app.use("/api/version", multiparty, versionRouter);
+app.use("/api/device", multiparty, deviceRouter);
+app.use("/api/days", multiparty, daysRouter);
 
 // Start
 app.listen(process.env.SERVER_PORT ?? 8080, appStartFunction);
